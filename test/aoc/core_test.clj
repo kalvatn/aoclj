@@ -20,3 +20,10 @@
     (is (= 2 (count-occurrences "aabc" \a)))
     (is (= 2 (count-occurrences "((())" \))))
     (is (= 3 (count-occurrences [:a :a :b :b :c :c :c] :c)))))
+
+(deftest test-char-range
+  (is (= [ \a \b \c ] (char-range \a \c)))
+  (is (= [ \a \b \c \d \e \f \g \h ] (char-range \a \h))))
+
+(deftest test-alphabet
+  (is (= "abcdefghijklmnopqrstuvwxyz" (apply str (alphabet)))))
