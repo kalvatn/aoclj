@@ -5,8 +5,7 @@
 
 (def disallowed [ "ab" "cd" "pq" "xy" ])
 
-(def double-letters (->> (alphabet)
-                        (map #(str % %))))
+(def double-letters (map #(str % %) (alphabet)))
 
 (defn has-three-vowels? [s]
   (<= 3 (count (re-seq #"[aeiou]" s))))

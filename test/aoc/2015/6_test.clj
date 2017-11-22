@@ -82,10 +82,8 @@
   (is (= [[1 1 1]
           [1 1 1]
           [1 1 1]] (part-one [ "toggle 0,0 through 2,2" ] 3))))
-  ; (part-one))
 
 (deftest test-part-two
   (is (= [[3 3 3]
           [3 3 3]
-          [3 3 3]] (part-two [ "toggle 0,0 through 2,2" "toggle 0,0 through 2,2" "turn off 0,0 through 2,2" ] 3)))
-  (part-two))
+          [3 3 3]] (part-two [ "toggle 0,0 through 2,2" "toggle 0,0 through 2,2" "turn off 0,0 through 2,2" ] 3))))

@@ -20,6 +20,7 @@
   (vec (take size (repeat (vec (take size (repeat OFF)))))))
 
 (defn state [grid y x]
+  ; (get-in grid [y x]))
   (nth (nth grid y) x))
 
 (defn grid-action [ grid [ action y x] ]
@@ -33,10 +34,11 @@
   (let [current (state grid y x)]
   (condp = action
     TURN_ON (assoc grid y (assoc (nth grid y) x (inc current)))
-    TURN_OFF (assoc grid y (assoc (nth grid y) x (if (> current 0) (dec current) current)))
+    TURN_OFF (assoc grid y (assoc (nth grid y) x (if (pos? current) (dec current) current)))
     TOGGLE (assoc grid y (assoc (nth grid y) x (+ current 2))))))
 
 (defn create-range-actions [ action y1 x1 y2 x2 ]
+  ; (println action y1 x1 y2 x2)
   (for [y (range y1 (inc y2)) x (range x1 (inc x2))]
     [action y x]))
 
@@ -44,10 +46,10 @@
   (println (for [r grid] (str r "\n"))))
 
 (defn range-action [ grid action y1 x1 y2 x2 ]
-  (reduce (fn [grid actions] (grid-action grid actions)) grid (create-range-actions action y1 x1 y2 x2)))
+  (reduce grid-action grid (create-range-actions action y1 x1 y2 x2)))
 
 (defn range-action-part-two [ grid action y1 x1 y2 x2 ]
-  (reduce (fn [grid actions] (grid-action-part-two grid actions)) grid (create-range-actions action y1 x1 y2 x2)))
+  (reduce grid-action-part-two grid (create-range-actions action y1 x1 y2 x2)))
 
 (defn parse-multiple-instruction [lines]
   (map parse-instruction lines))
