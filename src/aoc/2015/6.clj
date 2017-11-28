@@ -1,5 +1,6 @@
 (ns aoc.2015.6
-  (:require [aoc.core.io :refer :all]))
+  (:require [aoc.core.io :refer :all]
+            [aoc.core.matrix :refer :all]))
 
 (def input (lines "2015/6.txt"))
 
@@ -9,70 +10,37 @@
 (def TURN_OFF "turn off")
 (def TOGGLE "toggle")
 
-(def OFF 0)
-(def ON 1)
+(defn part-one-action-fn [action]
+  (condp = action
+    TURN_OFF (fn [v] false)
+    TURN_ON (fn [v] true)
+    TOGGLE not))
 
-(defn parse-instruction [s]
+(defn part-two-action-fn [action]
+  (condp = action
+    TURN_OFF (fn [v] (if (pos? v) (dec v) v))
+    TURN_ON inc
+    TOGGLE #(+ 2 %)))
+
+(defn parse-v2 [s action-lookup-fn]
   (let [parsed (rest (first (re-seq r s)))]
-    (conj (map read-string (rest parsed)) (first parsed))))
-
-(defn create-matrix [size]
-  (vec (take size (repeat (vec (take size (repeat OFF)))))))
-
-(defn state [grid y x]
-  ; (get-in grid [y x]))
-  (nth (nth grid y) x))
-
-(defn grid-action [ grid [ action y x] ]
-  (let [current (state grid y x)]
-  (condp = action
-    TURN_ON (assoc grid y (assoc (nth grid y) x ON))
-    TURN_OFF (assoc grid y (assoc (nth grid y) x OFF))
-    TOGGLE (assoc grid y (assoc (nth grid y) x (if (= ON current) OFF ON))))))
-
-(defn grid-action-part-two [ grid [ action y x] ]
-  (let [current (state grid y x)]
-  (condp = action
-    TURN_ON (assoc grid y (assoc (nth grid y) x (inc current)))
-    TURN_OFF (assoc grid y (assoc (nth grid y) x (if (pos? current) (dec current) current)))
-    TOGGLE (assoc grid y (assoc (nth grid y) x (+ current 2))))))
-
-(defn create-range-actions [ action y1 x1 y2 x2 ]
-  ; (println action y1 x1 y2 x2)
-  (for [y (range y1 (inc y2)) x (range x1 (inc x2))]
-    [action y x]))
-
-(defn pprint-grid [grid]
-  (println (for [r grid] (str r "\n"))))
-
-(defn range-action [ grid action y1 x1 y2 x2 ]
-  (reduce grid-action grid (create-range-actions action y1 x1 y2 x2)))
-
-(defn range-action-part-two [ grid action y1 x1 y2 x2 ]
-  (reduce grid-action-part-two grid (create-range-actions action y1 x1 y2 x2)))
-
-(defn parse-multiple-instruction [lines]
-  (map parse-instruction lines))
-
-(defn count-on [grid]
-  (count (filter #(= 1 %) (reduce concat grid))))
-
-(defn sum-brightness [grid]
-  (reduce + (reduce concat grid)))
-
-(defn transform-grid [input grid-size range-action-fn]
-  (let [original-grid (create-matrix grid-size)
-        actions (map parse-instruction input)]
-    (reduce (fn [grid [ action y1 x1 y2 x2 ]]
-              (range-action-fn grid action y1 x1 y2 x2)) original-grid actions)))
+    (conj (vec (map read-string (rest parsed))) (action-lookup-fn (first parsed)))))
 
 (defn part-one
   ([input] (part-one input 1000))
   ([input grid-size]
-   (count-on (transform-grid input grid-size range-action))))
+   (let [matrix (vec-2d grid-size grid-size false)
+         actions (map #(parse-v2 % part-one-action-fn) input)
+         new-matrix (reduce assign-range-with-fn matrix actions)]
+     ; (pprint new-matrix)
+     (count (filter true? (reduce concat new-matrix))))))
 
 (defn part-two
   ([input] (part-two input 1000))
   ([input grid-size]
-   (sum-brightness (transform-grid input grid-size range-action-part-two))))
+   (let [matrix (vec-2d grid-size grid-size 0)
+         actions (map #(parse-v2 % part-two-action-fn) input)
+         new-matrix (reduce assign-range-with-fn matrix actions)]
+     ; (pprint new-matrix)
+     (reduce + (reduce concat new-matrix)))))
 
