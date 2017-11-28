@@ -3,7 +3,7 @@
             [aoc.core.matrix :refer :all]))
 
 (deftest test-pprint
-  (pprint (vec-2d 3 3 0)))
+  (pprint-matrix (vec-2d 3 3 0)))
 
 (deftest test-vec-2d
   (is (= [[0 0 0]

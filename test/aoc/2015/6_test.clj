@@ -10,4 +10,3 @@
 (deftest test-part-two
   (is (= (* 10 10 2) (part-two [ "toggle 0,0 through 9,9" ] 10)))
   (is (= (* 100 100 2) (part-two [ "toggle 0,0 through 99,99" ] 100))))
-

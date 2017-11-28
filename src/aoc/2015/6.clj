@@ -2,6 +2,9 @@
   (:require [aoc.core.io :refer :all]
             [aoc.core.matrix :refer :all]))
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* :warn-on-boxed)
+
 (def input (lines "2015/6.txt"))
 
 (def r #"^(turn (?:on|off)|toggle) (\d+),(\d+) through (\d+),(\d+)$")
@@ -18,9 +21,9 @@
 
 (defn part-two-action-fn [action]
   (condp = action
-    TURN_OFF (fn [v] (if (pos? v) (dec v) v))
-    TURN_ON inc
-    TOGGLE #(+ 2 %)))
+    TURN_OFF (fn [^long v] (if (pos? v) (dec v) v))
+    TURN_ON (fn [^long v] (inc v))
+    TOGGLE (fn [^long v] (+ 2 v))))
 
 (defn parse-v2 [s action-lookup-fn]
   (let [parsed (rest (first (re-seq r s)))]
@@ -32,8 +35,7 @@
    (let [matrix (vec-2d grid-size grid-size false)
          actions (map #(parse-v2 % part-one-action-fn) input)
          new-matrix (reduce assign-range-with-fn matrix actions)]
-     ; (pprint new-matrix)
-     (count (filter true? (reduce concat new-matrix))))))
+     (count (filter true? (flatten new-matrix))))))
 
 (defn part-two
   ([input] (part-two input 1000))
@@ -41,6 +43,4 @@
    (let [matrix (vec-2d grid-size grid-size 0)
          actions (map #(parse-v2 % part-two-action-fn) input)
          new-matrix (reduce assign-range-with-fn matrix actions)]
-     ; (pprint new-matrix)
-     (reduce + (reduce concat new-matrix)))))
-
+     (reduce + (flatten new-matrix)))))
