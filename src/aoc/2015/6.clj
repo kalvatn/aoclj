@@ -1,7 +1,7 @@
 (ns aoc.2015.6
-  (:require [aoc.core :refer :all]))
+  (:require [aoc.core.io :refer :all]))
 
-(def input (file-lines "2015/6.txt"))
+(def input (lines "2015/6.txt"))
 
 (def r #"^(turn (?:on|off)|toggle) (\d+),(\d+) through (\d+),(\d+)$")
 
@@ -60,19 +60,19 @@
 (defn sum-brightness [grid]
   (reduce + (reduce concat grid)))
 
+(defn transform-grid [input grid-size range-action-fn]
+  (let [original-grid (create-matrix grid-size)
+        actions (map parse-instruction input)]
+    (reduce (fn [grid [ action y1 x1 y2 x2 ]]
+              (range-action-fn grid action y1 x1 y2 x2)) original-grid actions)))
+
 (defn part-one
-  ([] (part-one input 1000))
-  ([input grid-size] (let [ original-grid (create-matrix grid-size)
-                           actions (map parse-instruction input)
-                           new-grid (reduce (fn [grid [ action y1 x1 y2 x2 ]] (range-action grid action y1 x1 y2 x2)) original-grid actions)]
-                       (println "part one" (count-on new-grid))
-                       new-grid)))
+  ([input] (part-one input 1000))
+  ([input grid-size]
+   (count-on (transform-grid input grid-size range-action))))
 
 (defn part-two
-  ([] (part-two input 1000))
-  ([input grid-size] (let [ original-grid (create-matrix grid-size)
-                           actions (map parse-instruction input)
-                           new-grid (reduce (fn [grid [ action y1 x1 y2 x2 ]] (range-action-part-two grid action y1 x1 y2 x2)) original-grid actions)]
-                       (println "part two" (sum-brightness new-grid))
-                       new-grid)))
+  ([input] (part-two input 1000))
+  ([input grid-size]
+   (sum-brightness (transform-grid input grid-size range-action-part-two))))
 

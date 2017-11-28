@@ -1,8 +1,8 @@
 (ns aoc.2015.4
-  (:require [aoc.core :refer :all]
+  (:require [aoc.core.io :refer :all]
             [digest]))
 
-(def input (first-line "2015/4_1.txt"))
+(def input (first-line "2015/4.txt"))
 
 (defn first-five [s]
   (subs s 0 5))
@@ -20,15 +20,9 @@
        first
        second))
 
-(defn part-one
-  ([] (part-one input))
-  ([input] (let [answer (find-key input #"^00000.*")]
-             (println "part one" answer)
-             answer)))
+(defn part-one [input]
+  (find-key input #"^00000.*"))
 
-(defn part-two
-  ([] (part-two input))
-  ([input] (let [answer (find-key input #"^000000.*")]
-             (println "part two" answer)
-             answer)))
+(defn part-two [input]
+  (find-key input #"^000000.*"))
 

@@ -1,6 +1,5 @@
 (ns aoc.2015.2_test
   (:require [clojure.test :refer :all]
-            [aoc.core :refer :all]
             [aoc.2015.2 :refer :all]))
 
 (deftest test-parse-line
@@ -17,9 +16,3 @@
         result2 (calc-box-ribbon [1 1 10])]
     (is (= 34 result1))
     (is (= 14 result2))))
-
-(deftest test-one
-  (is (= true (number? (one)))))
-
-(deftest test-two
-  (is (= true (number? (two)))))

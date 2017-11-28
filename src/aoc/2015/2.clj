@@ -1,8 +1,8 @@
 (ns aoc.2015.2
-  (:require [aoc.core :refer :all]))
+  (:require [aoc.core.strings :refer :all]
+            [aoc.core.io :refer :all]))
 
-(def input (file-lines "2015/2_1.txt"))
-
+(def input (lines "2015/2.txt"))
 
 (defn parse-line [line]
   (map read-string (split line #"x")))
@@ -15,11 +15,6 @@
         smallest (apply min sides)
         surface (reduce + (map #(* 2 %) sides))
         ]
-        ; (println l w h)
-        ; (println sides)
-        ; (println smallest)
-        ; (println surface)
-
         (+ surface smallest)))
 
 (defn calc-box-ribbon [dimensions]
@@ -30,23 +25,17 @@
         smallest-perimiter (reduce + (map #(* 2 %) smallest-sides))
         volume (reduce * [l w h])
         ]
-    ; (println l w h)
-    ; (println smallest-perimiter)
-    ; (println volume)
     (+ volume smallest-perimiter)))
 
-(defn one []
+(defn part-one [input]
   (let [dimensions (map parse-line input)
         paper-per-box (map calc-box-paper dimensions)
         total (reduce + paper-per-box)]
-    (println total)
-    total
-    ))
+    total))
 
-(defn two []
+(defn part-two [input]
   (let [dimensions (map parse-line input)
         ribbon-per-box (map calc-box-ribbon dimensions)
         total (reduce + ribbon-per-box)]
-    (println total)
     total))
 
