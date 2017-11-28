@@ -1,7 +1,9 @@
 (ns aoc.2015.5
-  (:require [aoc.core :refer :all]))
+  (:require [aoc.core.strings :refer :all]
+            [aoc.core.ext :refer :all]
+            [aoc.core.io :refer :all]))
 
-(def input (file-lines "2015/5.txt"))
+(def input (lines "2015/5.txt"))
 
 (def disallowed [ "ab" "cd" "pq" "xy" ])
 
@@ -44,13 +46,9 @@
 (defn is-nicer? [s]
   (not-any? false? [ (has-repeating-sequence? s) (has-xyx? s) ]))
 
-(defn part-one
-  ([] (part-one input))
-  ([input] (let [answer (count (filter true? (map is-nice? input)))]
-             (println "part one" answer))))
+(defn part-one [input]
+  (count (filter true? (map is-nice? input))))
 
-(defn part-two
-  ([] (part-two input))
-  ([input] (let [answer (count (filter true? (map is-nicer? input)))]
-             (println "part two" answer))))
+(defn part-two [input]
+  (count (filter true? (map is-nicer? input))))
 

@@ -1,6 +1,5 @@
 (ns aoc.2015.6_test
   (:require [clojure.test :refer :all]
-            [aoc.core :refer :all]
             [aoc.2015.6 :refer :all]))
 
 
@@ -75,15 +74,24 @@
                             [1 1 1]]))))
 
 
-(deftest test-part-one
+(deftest test-transform-grid-pt1
   (is (= [[0 0 0]
           [0 0 0]
-          [0 0 0]] (part-one [ "toggle 0,0 through 2,2" "toggle 0,0 through 2,2" ] 3)))
+          [0 0 0]] (transform-grid [ "toggle 0,0 through 2,2" "toggle 0,0 through 2,2" ] 3 range-action)))
   (is (= [[1 1 1]
           [1 1 1]
-          [1 1 1]] (part-one [ "toggle 0,0 through 2,2" ] 3))))
+          [1 1 1]] (transform-grid [ "toggle 0,0 through 2,2" ] 3 range-action))))
 
-(deftest test-part-two
+(deftest test-transform-grid-pt2
   (is (= [[3 3 3]
           [3 3 3]
-          [3 3 3]] (part-two [ "toggle 0,0 through 2,2" "toggle 0,0 through 2,2" "turn off 0,0 through 2,2" ] 3))))
+          [3 3 3]] (transform-grid [ "toggle 0,0 through 2,2" "toggle 0,0 through 2,2" "turn off 0,0 through 2,2" ] 3 range-action-part-two))))
+
+(deftest test-part-one
+  (is (= (* 10 10) (part-one [ "toggle 0,0 through 9,9" ] 10)))
+  (is (= (* 100 100) (part-one [ "toggle 0,0 through 99,99" ] 100))))
+
+(deftest test-part-two
+  (is (= (* 10 10 2) (part-two [ "toggle 0,0 through 9,9" ] 10)))
+  (is (= (* 100 100 2) (part-two [ "toggle 0,0 through 99,99" ] 100))))
+

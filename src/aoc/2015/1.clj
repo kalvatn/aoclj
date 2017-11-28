@@ -1,21 +1,13 @@
 (ns aoc.2015.1
-  (:require [aoc.core :refer :all]))
+  (:require [aoc.core.io :refer :all]))
 
-(def input (first-line "2015/1_1.txt"))
-
-(defn left-parens []
-  (count-occurrences input \())
-
-(defn right-parens []
-  (count-occurrences input \)))
-
-(defn one []
-  (- (left-parens) (right-parens)))
+(def input (first-line "2015/1.txt"))
 
 (defn map-up-down [s]
   (map { \( 1 \) -1 } s))
 
+(defn part-one [input]
+  (reduce + (map-up-down input)))
 
-(defn two []
+(defn part-two [input]
   (count (take-while #(not= % -1) (reductions + 0 (map-up-down input)))))
-

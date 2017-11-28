@@ -1,6 +1,5 @@
 (ns aoc.2015.4_test
   (:require [clojure.test :refer :all]
-            [aoc.core :refer :all]
             [aoc.2015.4 :refer :all]))
 
 (deftest test-first-five
@@ -14,8 +13,8 @@
 
 ; (deftest test-part-one
 ;   (is (= 609043 (part-one "abcdef")))
-;   (is (= 1048970 (part-one "pqrstuv"))))
-  ; (is (= true (number? (part-one)))))
+;   (is (= 1048970 (part-one "pqrstuv")))
+;   (is (= true (number? (part-one)))))
 
 ; (deftest test-part-two
 ;   (is (= true (number? (part-two)))))

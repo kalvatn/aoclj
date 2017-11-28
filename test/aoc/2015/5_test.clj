@@ -1,6 +1,5 @@
 (ns aoc.2015.5_test
   (:require [clojure.test :refer :all]
-            [aoc.core :refer :all]
             [aoc.2015.5 :refer :all]))
 
 (deftest test-has-disallowed?
@@ -36,7 +35,6 @@
   (is (= false (is-nicer? "uurcxstgmygtbstg")))
   (is (= false (is-nicer? "ieodomkazucvgmuy"))))
 
-
 (deftest test-has-repeating-sequence
   (is (= true (has-repeating-sequence? "xyxy")))
   (is (= true (has-repeating-sequence? "aabcdefgaa")))
@@ -60,9 +58,3 @@
   (is (= true (is-xyx? "yyy")))
   (is (= false (is-xyx? "abb")))
   (is (= false (is-xyx? "bba"))))
-
-(deftest test-part-one
-  (part-one))
-
-(deftest test-part-two
-  (part-two))
