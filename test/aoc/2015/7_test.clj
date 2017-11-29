@@ -1,6 +1,5 @@
 (ns aoc.2015.7_test
   (:require [clojure.test :refer :all]
-            [aoc.core :refer :all]
             [aoc.2015.7 :refer :all]))
 
 (deftest test-parse-instruction

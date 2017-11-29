@@ -1,14 +1,14 @@
 (ns aoc.2015.7
-  (:require [aoc.core :refer :all]))
+  (:require [aoc.core.io :refer :all]
+            [aoc.core.strings :refer :all]))
 
-(def input (file-lines "2015/7.txt"))
+(def input (lines "2015/7.txt"))
 
 (def AND "AND")
 (def OR "OR")
 (def NOT "NOT")
 (def LSHIFT "LSHIFT")
 (def RSHIFT "RSHIFT")
-
 
 (defn parse-instruction [instruction]
   ; (println instruction)
@@ -51,10 +51,9 @@
   (into {} (map (comp vec reverse #(split % #" -> ")) instructions)))
 
 
-(defn part-one
-  ([] (part-one input))
-  ([input] "part one"))
+(defn part-one [input]
+  "part one")
 
-(defn part-two
-  ([] (part-two input))
-  ([input] "part two"))
+(defn part-two [input]
+  "part two")
+
