@@ -1,6 +1,6 @@
-(ns aoc.2015.7_test
+(ns aoc.2015.07_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.7 :refer :all]))
+            [aoc.2015.07 :refer :all]))
 
 (deftest test-parse-instruction
   (is (= {:tokens '(123 -> x)

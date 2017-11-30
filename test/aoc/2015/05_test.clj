@@ -1,6 +1,6 @@
-(ns aoc.2015.5_test
+(ns aoc.2015.05_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.5 :refer :all]))
+            [aoc.2015.05 :refer :all]))
 
 (deftest test-has-disallowed?
   (is (= false (has-disallowed? "aacbyxqp")))

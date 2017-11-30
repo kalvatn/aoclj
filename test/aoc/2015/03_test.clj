@@ -1,6 +1,6 @@
-(ns aoc.2015.3_test
+(ns aoc.2015.03_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.3 :refer :all]))
+            [aoc.2015.03 :refer :all]))
 
 (deftest test-parse-input
   (is (= [ [-1 0] [0 -1] [0 1] [1 0]] (parse-input "<v^>"))))

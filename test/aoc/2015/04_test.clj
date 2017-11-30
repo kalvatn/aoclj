@@ -1,6 +1,6 @@
-(ns aoc.2015.4_test
+(ns aoc.2015.04_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.4 :refer :all]))
+            [aoc.2015.04 :refer :all]))
 
 (deftest test-first-five
   (is (= "abcde" (first-five "abcdefghjklimnop"))))

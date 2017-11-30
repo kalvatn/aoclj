@@ -1,8 +1,8 @@
-(ns aoc.2015.4
+(ns aoc.2015.04
   (:require [aoc.core.io :refer :all]
             [digest]))
 
-(def input (first-line "2015/4.txt"))
+(def input (first-line "2015/04.txt"))
 
 (defn first-five [s]
   (subs s 0 5))

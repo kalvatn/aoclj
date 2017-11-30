@@ -1,7 +1,7 @@
-(ns aoc.2015.1
+(ns aoc.2015.01
   (:require [aoc.core.io :refer :all]))
 
-(def input (first-line "2015/1.txt"))
+(def input (first-line "2015/01.txt"))
 
 (defn map-up-down [s]
   (map { \( 1 \) -1 } s))

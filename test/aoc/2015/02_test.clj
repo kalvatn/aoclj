@@ -1,6 +1,6 @@
-(ns aoc.2015.2_test
+(ns aoc.2015.02_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.2 :refer :all]))
+            [aoc.2015.02 :refer :all]))
 
 (deftest test-parse-line
   (is (= [2 3 4] (parse-line "2x3x4"))))

@@ -1,6 +1,6 @@
-(ns aoc.2015.6_test
+(ns aoc.2015.06_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.6 :refer :all]))
+            [aoc.2015.06 :refer :all]))
 
 (deftest test-part-one
   (is (= (* 3 3) (part-one [ "toggle 0,0 through 2,2" ] 3)))

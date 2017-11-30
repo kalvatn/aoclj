@@ -1,8 +1,8 @@
-(ns aoc.2015.7
+(ns aoc.2015.07
   (:require [aoc.core.io :refer :all]
             [aoc.core.strings :refer :all]))
 
-(def input (lines "2015/7.txt"))
+(def input (lines "2015/07.txt"))
 
 (def AND "AND")
 (def OR "OR")

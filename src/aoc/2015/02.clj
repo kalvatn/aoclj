@@ -1,8 +1,8 @@
-(ns aoc.2015.2
+(ns aoc.2015.02
   (:require [aoc.core.strings :refer :all]
             [aoc.core.io :refer :all]))
 
-(def input (lines "2015/2.txt"))
+(def input (lines "2015/02.txt"))
 
 (defn parse-line [line]
   (map read-string (split line #"x")))

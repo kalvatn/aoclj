@@ -1,6 +1,6 @@
-(ns aoc.2015.1_test
+(ns aoc.2015.01_test
   (:require [clojure.test :refer :all]
-            [aoc.2015.1 :refer :all]))
+            [aoc.2015.01 :refer :all]))
 
 (deftest test-map-up-down
   (is (= [1 1 -1 -1 -1 -1] (map-up-down "(())))"))))

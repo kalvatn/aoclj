@@ -1,11 +1,11 @@
-(ns aoc.2015.6
+(ns aoc.2015.06
   (:require [aoc.core.io :refer :all]
             [aoc.core.matrix :refer :all]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
 
-(def input (lines "2015/6.txt"))
+(def input (lines "2015/06.txt"))
 
 (def r #"^(turn (?:on|off)|toggle) (\d+),(\d+) through (\d+),(\d+)$")
 

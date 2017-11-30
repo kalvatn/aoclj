@@ -1,9 +1,9 @@
-(ns aoc.2015.5
+(ns aoc.2015.05
   (:require [aoc.core.strings :refer :all]
             [aoc.core.ext :refer :all]
             [aoc.core.io :refer :all]))
 
-(def input (lines "2015/5.txt"))
+(def input (lines "2015/05.txt"))
 
 (def disallowed [ "ab" "cd" "pq" "xy" ])
 

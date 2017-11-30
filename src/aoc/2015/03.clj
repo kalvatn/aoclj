@@ -1,7 +1,7 @@
-(ns aoc.2015.3
+(ns aoc.2015.03
   (:require [aoc.core.io :refer :all]))
 
-(def input (first-line "2015/3.txt"))
+(def input (first-line "2015/03.txt"))
 
 (def LEFT \<)
 (def RIGHT \>)
