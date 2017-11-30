@@ -1,0 +1,6 @@
+(ns aoc.$YEAR.$DAY-test
+  (:require [clojure.test :refer :all]
+            [aoc.$YEAR.$DAY :refer :all]))
+
+(deftest test-part-one)
+(deftest test-part-two)

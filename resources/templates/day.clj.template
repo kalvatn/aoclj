@@ -1,0 +1,9 @@
+(ns aoc.$YEAR.$DAY
+  (:require [aoc.core.io :refer :all]))
+
+(def input (lines "$YEAR/$DAY.txt"))
+
+(defn part-one [input]
+  )
+(defn part-two [input]
+  )
