@@ -6,6 +6,9 @@
   (is (= [ \a \b \c ] (char-range \a \c)))
   (is (= [ \a \b \c \d \e \f \g \h ] (char-range \a \h))))
 
+(deftest test-char-range
+  (is (= [ \a \b \c \d \e ] (char-range-plus \a 4))))
+
 (deftest test-alphabet
   (is (= "abcdefghijklmnopqrstuvwxyz" (apply str (alphabet)))))
 
@@ -19,3 +22,9 @@
     (is (= 2 (count-occurrences "aabc" \a)))
     (is (= 2 (count-occurrences "((())" \))))
     (is (= 3 (count-occurrences [:a :a :b :b :c :c :c] :c)))))
+
+(deftest test-generate-keywords
+  (is (= [:a :b :c :d :e] (generate-keywords 5))))
+
+(deftest test-map-by-char
+  (is (= {:a 1 :b 2 :c 3 :d 4 :e 5} (map-by-char [1 2 3 4 5]))))
