@@ -9,3 +9,7 @@
 (deftest test-all-combinations
   (is (= [[1] [2] [3] [1 2] [1 3] [2 3] [1 2 3] ] (all-combinations [1 2 3]))))
 
+(deftest test-abs
+  (is (= 1 (abs -1)))
+  (is (= 1 (abs 1))))
+
