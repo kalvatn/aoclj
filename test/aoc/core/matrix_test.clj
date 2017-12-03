@@ -92,3 +92,14 @@
             [false false true]] toggled))))
 
 
+(deftest test-out-of-bounds?
+  (let [m (vec-2d 1000 1000 0)]
+    (is (false? (out-of-bounds? m [3 3])))
+    (is (false? (out-of-bounds? m [3 3])))
+    (is (true? (out-of-bounds? m [1000 1000])))
+    ))
+
+(deftest test-neighbours
+  (let [m (vec-2d 3 3 0)]
+    (is (= [[0 1] [1 0] [1 1]] (neighbours m [0 0])))))
+

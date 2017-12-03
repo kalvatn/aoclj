@@ -2,13 +2,6 @@
   (:require [clojure.test :refer :all]
             [aoc.2017.03 :refer :all]))
 
-(deftest test-oob
-  (is (true? (oob [3 3] 3)))
-  (is (true? (oob [-1 3] 3)))
-  (is (true? (oob [0 3] 3)))
-  (is (true? (oob [0 -1] 3)))
-  )
-
 (deftest test-next-pos
   (is (= [1 2] (next-pos 1 1 [0 1])))
   )
@@ -47,12 +40,12 @@
 (deftest test-generate-number-spiral
   (is (= [[5 4 3]
           [6 1 2]
-          [7 8 9] ] (number-spiral 3))))
-  ; (is (= [[17  16  15  14  13]
-  ;         [18   5   4   3  12]
-  ;         [19   6   1   2  11]
-  ;         [20   7   8   9  10]
-  ;         [21  22  23  24  25]] (number-spiral 5))))
+          [7 8 9] ] (number-spiral 3)))
+  (is (= [[17  16  15  14  13]
+          [18   5   4   3  12]
+          [19   6   1   2  11]
+          [20   7   8   9  10]
+          [21  22  23  24  25]] (number-spiral 5))))
 
 (deftest test-sum-neighbours
   (let [m [[1 1 1]

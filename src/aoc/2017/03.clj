@@ -5,8 +5,7 @@
             [aoc.core.math :refer :all]
             [clojure.math.numeric-tower :refer [sqrt ceil expt]]))
 
-; (def input (lines "2017/03.txt"))
-(def input 368078)
+(def input (read-string (first-line "2017/03.txt")))
 
 (defn switch-direction [dir]
   (condp = dir
@@ -14,9 +13,6 @@
     [-1 0] [0 -1]
     [0 -1] [1 0]
     [1 0] [0 1]))
-
-(defn oob [[y x] size]
-  (or (>= x size) (< x 0) (>= y size) (< y 0)))
 
 (defn next-pos [y x dir]
   (let [ny (+ y (first dir))
@@ -49,27 +45,14 @@
   (let [size (int (ceil (sqrt input)))
         spiral (number-spiral size)
         ]
-    ; (println (pprint-number-matrix (number-spiral 11) 3))
-    (first (filter #(not (nil? %)) (for [y (range size) x (range size)]
-      (if (= (lookup spiral y x) input) (abs (- y x)) nil))))))
-
-
-(defn neighbours [matrix y x]
-  (filter #(not (oob % (count matrix)))
-            [[y (inc x)]
-             [y (dec x)]
-             [(dec y) x]
-             [(inc y) x]
-             [(inc y) (inc x)]
-             [(inc y) (dec x)]
-             [(dec y) (inc x)]
-             [(dec y) (dec x)]]))
-
+    (first (filter #(not (nil? %))
+       (for [y (range size) x (range size)] (if (= (lookup spiral y x) input) (abs (- y x)) nil))))))
 
 (defn sum-neighbours [matrix y x]
-  (reduce +' (map #(lookup matrix (first %) (second %)) (neighbours matrix y x))))
+  ; +' to fix integer overflow issue
+  (reduce +' (map #(lookup matrix (first %) (second %)) (neighbours matrix [ y x ]))))
 
-(defn gen2 [size matrix]
+(defn sum-spiral [size matrix]
   (let [turns (set (drop 2 (map next-turn (range (expt size 2)))))]
     (loop [y (int (/ size 2)) x y dir [0 1] r [] n 1 m matrix]
       (if (= (dec n) (* size size)) m
@@ -85,7 +68,7 @@
 (defn part-two [input]
   (let [size (int (ceil (sqrt input)))
         matrix (vec-2d size size 0)
-        spiral-seq (gen2 size matrix)]
+        spiral-seq (sum-spiral size matrix)]
 
     (first (sort (filter #(not (nil? %))
                    (for [y (range size) x (range size)]

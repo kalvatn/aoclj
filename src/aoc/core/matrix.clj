@@ -17,7 +17,6 @@
 (defn vec-2d [columns rows initial-value]
   (vec (take columns (repeat (vec (take rows (repeat initial-value)))))))
 
-
 (defn row [matrix y]
   (nth matrix y))
 
@@ -35,3 +34,18 @@
 
 (defn assign-range-with-fn [ matrix [ y1 x1 y2 x2 value-fn] ]
   (reduce assign-with-fn matrix (map #(conj % value-fn) (range-pairs y1 x1 y2 x2))))
+
+(defn out-of-bounds? [ matrix [y x] ]
+  (let [size (count matrix)]
+    (or (>= x size) (< x 0) (>= y size) (< y 0))))
+
+(defn neighbours [matrix [y x]]
+  (filter #(not (out-of-bounds? matrix %))
+            [[y (inc x)]
+             [y (dec x)]
+             [(dec y) x]
+             [(inc y) x]
+             [(inc y) (inc x)]
+             [(inc y) (dec x)]
+             [(dec y) (inc x)]
+             [(dec y) (dec x)]]))
