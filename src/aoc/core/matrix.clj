@@ -3,6 +3,14 @@
 (defn pprint-matrix [matrix]
   (println (for [row matrix] (pr-str row "\n"))))
 
+(defn pprint-number-matrix [matrix digit-size]
+  (println
+    (apply str
+      (reduce concat
+              (interpose "\n"
+                         (map #(map (fn [v] (format (str "%0" digit-size "d ") v)) %) matrix))))))
+
+
 (defn range-pairs [y1 x1 y2 x2]
   (for [y (range y1 (inc y2)) x (range x1 (inc x2))] [y x]))
 
