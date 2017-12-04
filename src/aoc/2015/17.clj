@@ -18,7 +18,7 @@
   (count (combinations-with-sum (keys containers) litres)))
 
 (defn part-one [input]
-  (println (parse-input input))
+  ; (println (parse-input input))
   )
 (defn part-two [input]
   )

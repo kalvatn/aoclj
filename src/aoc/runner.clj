@@ -28,3 +28,6 @@
        (print (with-out-str (print-result-with-time (str modulename "/part-one") pt1-fn input)))
        (println (with-out-str (print-result-with-time (str modulename "/part-two") pt2-fn input))))
      (catch Exception e (print-error year day e)))))
+
+(defn run-year [year]
+  (map #(run-day year %) (range 1 26)))
