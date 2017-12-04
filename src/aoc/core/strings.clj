@@ -1,7 +1,11 @@
 (ns aoc.core.strings
-  (:require [aoc.core.macros :as macros]))
+  (:require [aoc.core.macros :as macros]
+            [potemkin]))
 
-(macros/import-all-vars clojure.string)
+(macros/import-all-vars-with-exclusions clojure.string [reverse replace])
+
+(potemkin/import-fn clojure.string/replace str-replace)
+(potemkin/import-fn clojure.string/reverse str-reverse)
 
 (defn char-range [char-start char-end]
   (map char (range (int char-start) (inc (int char-end)))))
