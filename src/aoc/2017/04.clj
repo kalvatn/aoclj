@@ -1,6 +1,7 @@
 (ns aoc.2017.04
   (:require [aoc.core.io :refer :all]
-            [aoc.core.ext :refer :all]))
+            [aoc.core.ext :refer :all]
+            [aoc.core.math :as math]))
 
 (def input (lines "2017/04.txt"))
 
@@ -18,7 +19,7 @@
   (= (sort-word w1) (sort-word w2)))
 
 (defn has-anagram? [words]
-  (let [c (clojure.math.combinatorics/combinations words 2)]
+  (let [c (math/combinations words 2)]
     (any? true? (map is-anagram? c))))
 
 (defn filter-duplicates [input]

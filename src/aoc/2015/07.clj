@@ -1,6 +1,6 @@
 (ns aoc.2015.07
   (:require [aoc.core.io :refer :all]
-            [aoc.core.strings :refer :all]))
+            [aoc.core.strings :as s]))
 
 (def input (lines "2015/07.txt"))
 
@@ -48,12 +48,10 @@
       )))
 
 (defn initialize-register [instructions]
-  (into {} (map (comp vec reverse #(split % #" -> ")) instructions)))
+  (into {} (map (comp vec reverse #(s/split % #" -> ")) instructions)))
 
 
-(defn part-one [input]
-  "part one")
+(defn part-one [input])
 
-(defn part-two [input]
-  "part two")
+(defn part-two [input])
 

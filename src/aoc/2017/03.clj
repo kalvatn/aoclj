@@ -2,8 +2,7 @@
   (:require [aoc.core.io :refer :all]
             [aoc.core.matrix :refer :all]
             [aoc.core.ext :refer :all]
-            [aoc.core.math :refer :all]
-            [clojure.math.numeric-tower :refer [sqrt ceil expt]]))
+            [aoc.core.math :as math]))
 
 (def input (read-string (first-line "2017/03.txt")))
 
@@ -21,10 +20,10 @@
     ))
 
 (defn next-turn [n]
-  (ceil (/ (+ 3 (expt n 2)) 4)))
+  (math/ceil (/ (+ 3 (math/expt n 2)) 4)))
 
 (defn gen [size]
-  (let [turns (set (drop 2 (map next-turn (range (expt size 2)))))]
+  (let [turns (set (drop 2 (map next-turn (range (math/expt size 2)))))]
     (loop [y (int (/ size 2)) x y dir [0 1] r [] n 1]
       (if (= (dec n) (* size size)) r
         (let [
@@ -42,18 +41,18 @@
 
 
 (defn part-one [input]
-  (let [size (int (ceil (sqrt input)))
+  (let [size (int (math/ceil (math/sqrt input)))
         spiral (number-spiral size)
         ]
     (first (filter #(not (nil? %))
-       (for [y (range size) x (range size)] (if (= (lookup spiral y x) input) (abs (- y x)) nil))))))
+       (for [y (range size) x (range size)] (if (= (lookup spiral y x) input) (math/abs (- y x)) nil))))))
 
 (defn sum-neighbours [matrix y x]
   ; +' to fix integer overflow issue
   (reduce +' (map #(lookup matrix (first %) (second %)) (neighbours matrix [ y x ]))))
 
 (defn sum-spiral [size matrix]
-  (let [turns (set (drop 2 (map next-turn (range (expt size 2)))))]
+  (let [turns (set (drop 2 (map next-turn (range (math/expt size 2)))))]
     (loop [y (int (/ size 2)) x y dir [0 1] r [] n 1 m matrix]
       (if (= (dec n) (* size size)) m
         (let [
@@ -66,7 +65,7 @@
           (recur ny nx new-dir (conj r [y x value]) (inc n) (assign m [y x value])))))))
 
 (defn part-two [input]
-  (let [size (int (ceil (sqrt input)))
+  (let [size (int (math/ceil (math/sqrt input)))
         matrix (vec-2d size size 0)
         spiral-seq (sum-spiral size matrix)]
 

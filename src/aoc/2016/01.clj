@@ -1,6 +1,6 @@
 (ns aoc.2016.01
   (:require [aoc.core.io :refer :all]
-            [aoc.core.math :refer :all]))
+            [aoc.core.math :as math]))
 
 (def input (lines "2016/01.txt"))
 
@@ -22,7 +22,7 @@
     :W [ (first pos) (- (second pos) steps) :W]))
 
 (defn get-distance [pos]
-  (+ (abs (first pos)) (abs (second pos))))
+  (+ (math/abs (first pos)) (math/abs (second pos))))
 
 
 (defn part-one [input]
