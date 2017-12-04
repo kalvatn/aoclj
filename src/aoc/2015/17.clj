@@ -1,7 +1,7 @@
 (ns aoc.2015.17
   (:require [aoc.core.io :refer :all]
             [aoc.core.math :as math]
-            [aoc.core.strings :as s]))
+            [aoc.core.string :as s]))
 
 (def input (lines "2015/17.txt"))
 

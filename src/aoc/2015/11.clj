@@ -1,6 +1,6 @@
 (ns aoc.2015.11
   (:require [aoc.core.io :refer :all]
-            [aoc.core.strings :as s]
+            [aoc.core.string :as s]
             [aoc.core.ext :refer :all]))
 
 (def input (first-line "2015/11.txt"))

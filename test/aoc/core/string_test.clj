@@ -1,6 +1,6 @@
-(ns aoc.core.strings-test
+(ns aoc.core.string-test
   (:require [clojure.test :refer :all]
-            [aoc.core.strings :as s]))
+            [aoc.core.string :as s]))
 
 (deftest test-char-range
   (is (= [ \a \b \c ] (s/char-range \a \c)))

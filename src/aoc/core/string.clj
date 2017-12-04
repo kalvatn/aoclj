@@ -1,4 +1,4 @@
-(ns aoc.core.strings
+(ns aoc.core.string
   (:require [aoc.core.macros :as macros]
             [potemkin]))
 
