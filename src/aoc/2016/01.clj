@@ -2,7 +2,7 @@
   (:require [aoc.core.io :refer :all]
             [aoc.core.math :as math]))
 
-(def input (lines "2016/01.txt"))
+(def input (first-line "2016/01.txt"))
 
 (defn parse-input [input]
   (map (fn [[d n]] [(keyword d) (read-string n)]) (map rest (re-seq #"(R|L)(\d+)" input))))
@@ -14,7 +14,7 @@
     :S (if (= :R direction) :W :E)
     :W (if (= :R direction) :N :S)))
 
-(defn next-pos [pos direction steps]
+(defn next-pos [pos [direction steps]]
   (condp = (next-facing (last pos) direction)
     :N [ (+ (first pos) steps) (second pos) :N]
     :S [ (- (first pos) steps) (second pos) :S]
@@ -26,6 +26,7 @@
 
 
 (defn part-one [input]
+  (get-distance (reduce next-pos [0 0 :N] (parse-input input)))
   )
 (defn part-two [input]
   )
