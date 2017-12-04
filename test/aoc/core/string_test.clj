@@ -43,3 +43,33 @@
 
 (deftest test-padright
   (is (= "abcdef   " (s/padright "abcdef" 9 \space))))
+
+
+(deftest test-replace-index
+  (is (= "abXde" (s/replace-index "abcde" 2 "X")))
+  (is (= "aaaaX" (s/replace-index "aaaaa" 4 "X")))
+  )
+
+(deftest test-replace-range
+  ; 'aaaaa', 0, 2, 'a', 'X'), 'XXXaa')
+  ; 'aaaaabbbcccdeeeaaaa', 0, 15, 'a', 'X'), 'XXXXXbbbcccdeeeXaaa')
+  (is (= "aaaaa" (s/replace-range "XXXaa" 0 2 "a")))
+  (is (= "2222222222222222aaa" (s/replace-range "XXXXXbbbcccdeeeXaaa" 0 15 "2")))
+  )
+
+
+(deftest test-swap-index
+  (is (= "abcde" (s/swap-index "adcbe" 1 3)))
+  (is (= "4aaa0" (s/swap-index "0aaa4" 0 4)))
+  )
+
+(deftest test-reverse-range
+  (is (= "cbadef" (s/reverse-range "abcdef" 0 2)))
+  (is (= "edcba" (s/reverse-range "abcde" 0 4)))
+  (is (= "0123456789" (s/reverse-range "0123654789" 4 6)))
+  )
+
+(deftest test-move-index
+  (is (= "bdeac" (s/move-index "bcdea" 1 4)))
+  (is (= "abdec" (s/move-index "bdeac" 3 0)))
+  )

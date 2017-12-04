@@ -16,10 +16,6 @@
 (defn alphabet []
   (char-range \a \z))
 
-; (defn split
-;   ([s] (split s #" "))
-;   ([s pattern] (clojure.string/split s pattern)))
-
 (defn count-occurrences [s item]
   (get (frequencies s) item))
 
@@ -48,5 +44,45 @@
 
 (defn padright [s n pad]
   (apply str (concat s (take (- n (count s)) (repeat pad)))))
+
+(defn replace-index [s index replacement]
+  (str (subs s 0 index) replacement (subs s (inc index) (count s))))
+
+(defn replace-range [s start-index end-index replacement]
+  (reduce #(replace-index %1 (first %2) (second %2)) s (map vector (range start-index (inc end-index)) (repeat replacement))))
+
+(defn swap-index [s index1 index2]
+  (let [c1 (nth s index1)
+        c2 (nth s index2)]
+    (reduce #(replace-index %1 (first %2) (second %2)) s [[index1 c2] [index2 c1]])))
+
+(defn reverse-range [s start end]
+  (str (subs s 0 start)
+       (str-reverse (subs s start (inc end)))
+       (subs s (inc end) (count s))))
+
+(defn move-element [v from to]
+  (if (> to from)
+    (concat
+      (subvec v 0 from)
+      (subvec v (inc from) (inc to))
+      [(nth v from)]
+      (subvec v (inc to) (count v)))
+    (concat
+      (subvec v 0 to)
+      [(nth v from)]
+      (subvec v to from)
+      (subvec v (inc from) (count v)))))
+
+(defn move-index [s from-index to-index]
+  (apply str (move-element (vec (seq s)) from-index to-index)))
+
+
+
+
+
+
+
+
 
 
