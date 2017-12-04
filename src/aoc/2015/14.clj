@@ -72,7 +72,7 @@
 (defn part-one [input]
   (:distance (last (sort-by-distance (tick-all 2503)))))
 
-(defn part-two [input]
-  (-pprint (map find-leaders (map tick-all (range 1000)))))
+(defn part-two [input])
+  ; (-pprint (map find-leaders (map tick-all (range 1000)))))
   ; (last (map find-leaders (map tick-all (range 1000)))))
-  ; (sort-by-distance (tick-all 2503))
+  ; (sort-by-distance (tick-all 2503)))
