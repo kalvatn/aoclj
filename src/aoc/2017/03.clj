@@ -48,7 +48,7 @@
        (for [y (range size) x (range size)] (if (= (matrix/lookup spiral y x) input) (math/abs (- y x)) nil))))))
 
 (defn sum-neighbours [matrix y x]
-  ; +' to fix integer overflow issue
+  ; +' to fix integer overflow issue (autopromotes longs)
   (reduce +' (map #(matrix/lookup matrix (first %) (second %)) (matrix/neighbours matrix [ y x ]))))
 
 (defn sum-spiral [size matrix]
