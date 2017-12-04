@@ -2,8 +2,22 @@
   (:require [clojure.test :refer :all]
             [aoc.core.matrix :refer :all]))
 
-(deftest test-pprint
-  (pprint-matrix (create-2d 3 3 0)))
+(deftest test-pprint-matrix
+  (let [m (create-2d 3 3 0)]
+    (is (= "000\n000\n000\n"
+           (with-out-str (pprint-matrix m))))
+    (is (= "0 0 0 \n0 0 0 \n0 0 0 \n"
+           (with-out-str (pprint-matrix m #(format "%s " %)))))
+    (is (= "...\n...\n...\n"
+           (with-out-str (pprint-matrix m (fn [v] ".")))))
+    ))
+
+(deftest test-pprint-number-matrix
+  (let [m (create-2d 3 3 0)]
+    (is (= "0 0 0 \n0 0 0 \n0 0 0 \n"
+           (with-out-str (pprint-number-matrix m))))
+    (is (= "00 00 00 \n00 00 00 \n00 00 00 \n"
+           (with-out-str (pprint-number-matrix m 2))))))
 
 (deftest test-create-2d
   (is (= [[0 0 0]
