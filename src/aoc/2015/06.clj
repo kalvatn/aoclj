@@ -32,7 +32,7 @@
 (defn part-one
   ([input] (part-one input 1000))
   ([input grid-size]
-   (let [matrix (matrix/vec-2d grid-size grid-size false)
+   (let [matrix (matrix/create-2d grid-size grid-size false)
          actions (map #(parse-v2 % part-one-action-fn) input)
          new-matrix (reduce matrix/assign-range-with-fn matrix actions)]
      (count (filter true? (flatten new-matrix))))))
@@ -40,7 +40,7 @@
 (defn part-two
   ([input] (part-two input 1000))
   ([input grid-size]
-   (let [matrix (matrix/vec-2d grid-size grid-size 0)
+   (let [matrix (matrix/create-2d grid-size grid-size 0)
          actions (map #(parse-v2 % part-two-action-fn) input)
          new-matrix (reduce matrix/assign-range-with-fn matrix actions)]
      (reduce + (flatten new-matrix)))))

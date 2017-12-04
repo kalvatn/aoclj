@@ -14,7 +14,7 @@
 (defn range-pairs [y1 x1 y2 x2]
   (for [y (range y1 (inc y2)) x (range x1 (inc x2))] [y x]))
 
-(defn vec-2d [columns rows initial-value]
+(defn create-2d [columns rows initial-value]
   (vec (take columns (repeat (vec (take rows (repeat initial-value)))))))
 
 (defn row [matrix y]

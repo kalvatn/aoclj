@@ -34,7 +34,7 @@
           (recur ny nx new-dir (conj r [y x n]) (inc n)))))))
 
 (defn number-spiral [size]
-  (let [matrix (matrix/vec-2d size size 0)
+  (let [matrix (matrix/create-2d size size 0)
         spiral-seq (gen size)]
     (reduce matrix/assign matrix spiral-seq)
     ))
@@ -66,7 +66,7 @@
 
 (defn part-two [input]
   (let [size (int (math/ceil (math/sqrt input)))
-        matrix (matrix/vec-2d size size 0)
+        matrix (matrix/create-2d size size 0)
         spiral-seq (sum-spiral size matrix)]
 
     (first (sort (filter #(not (nil? %))
