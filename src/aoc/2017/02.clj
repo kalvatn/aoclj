@@ -1,7 +1,6 @@
 (ns aoc.2017.02
   (:require [aoc.core.io :refer :all]
-            [aoc.core.strings :refer :all]
-            [aoc.core.math :refer :all]))
+            [aoc.core.math :as math]))
 
 (def input (lines "2017/02.txt"))
 
@@ -21,7 +20,7 @@
   [(reduce max row) (reduce min row)])
 
 (defn row-evenly-divisible [row]
-  (filter evenly-divisible? (map max-min (combinations-of-size row 2))))
+  (filter evenly-divisible? (map max-min (math/combinations row 2))))
 
 (defn part-one [input]
   (reduce + (map row-diff-largest-smallest (parse-input input))))

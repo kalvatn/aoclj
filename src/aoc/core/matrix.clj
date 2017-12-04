@@ -1,21 +1,24 @@
 (ns aoc.core.matrix)
 
-(defn pprint-matrix [matrix]
-  (println (for [row matrix] (pr-str row "\n"))))
-
-(defn pprint-number-matrix [matrix digit-size]
+(defn pprint-matrix
+  ([matrix] (pprint-matrix matrix (fn [v] v)))
+  ([matrix value-format-fn]
   (println
     (apply str
       (reduce concat
               (interpose "\n"
-                         (map #(map (fn [v] (format (str "%0" digit-size "d ") v)) %) matrix))))))
+                         (map #(map value-format-fn %) matrix)))))))
 
+(defn pprint-number-matrix
+  ([matrix] (pprint-number-matrix matrix 1))
+  ([matrix digit-size]
+   (pprint-matrix matrix #(format (str "%0" digit-size "d ") %))))
 
 (defn range-pairs [y1 x1 y2 x2]
   (for [y (range y1 (inc y2)) x (range x1 (inc x2))] [y x]))
 
-(defn vec-2d [columns rows initial-value]
-  (vec (take columns (repeat (vec (take rows (repeat initial-value)))))))
+(defn create-2d [rows cols initial-value]
+  (vec (take rows (repeat (vec (take cols (repeat initial-value)))))))
 
 (defn row [matrix y]
   (nth matrix y))

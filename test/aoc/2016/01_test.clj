@@ -12,12 +12,12 @@
   )
 
 (deftest test-next-pos
-  (is (= [0 2 :E] (next-pos [0 0 :N] :R 2)))
-  (is (= [3 2 :N] (next-pos [0 2 :E] :L 3)))
+  (is (= [0 2 :E] (next-pos [0 0 :N] [:R 2])))
+  (is (= [3 2 :N] (next-pos [0 2 :E] [:L 3])))
 
-  (is (= [0 2 :E] (next-pos [0 0 :N] :R 2)))
-  (is (= [-2 2 :S] (next-pos [0 2 :E] :R 2)))
-  (is (= [-2 0 :W] (next-pos [-2 2 :S] :R 2)))
+  (is (= [0 2 :E] (next-pos [0 0 :N] [:R 2])))
+  (is (= [-2 2 :S] (next-pos [0 2 :E] [:R 2])))
+  (is (= [-2 0 :W] (next-pos [-2 2 :S] [:R 2])))
   )
 
 (deftest test-get-distance

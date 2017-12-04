@@ -1,11 +1,12 @@
 (ns aoc.2015.02
-  (:require [aoc.core.strings :refer :all]
-            [aoc.core.io :refer :all]))
+  (:require
+            [aoc.core.io :refer :all]
+            [aoc.core.string :as s]))
 
 (def input (lines "2015/02.txt"))
 
 (defn parse-line [line]
-  (map read-string (split line #"x")))
+  (map read-string (s/split line #"x")))
 
 (defn calc-box-paper [dimensions]
   (let [l (first dimensions)

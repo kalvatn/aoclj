@@ -1,11 +1,11 @@
 (ns aoc.2015.11
   (:require [aoc.core.io :refer :all]
-            [aoc.core.strings :refer :all]
+            [aoc.core.string :as s]
             [aoc.core.ext :refer :all]))
 
 (def input (first-line "2015/11.txt"))
 
-(def letter-straights (set (map #(apply str %) (partition 3 1 (alphabet)))))
+(def letter-straights (set (map #(apply str %) (partition 3 1 (s/alphabet)))))
 
 (defn increment-char [c]
   (if (= \z c) \a (char (inc (int c)))))

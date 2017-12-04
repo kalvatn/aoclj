@@ -1,13 +1,13 @@
 (ns aoc.2015.05
-  (:require [aoc.core.strings :refer :all]
+  (:require [aoc.core.io :refer :all]
             [aoc.core.ext :refer :all]
-            [aoc.core.io :refer :all]))
+            [aoc.core.string :as s]))
 
 (def input (lines "2015/05.txt"))
 
 (def disallowed [ "ab" "cd" "pq" "xy" ])
 
-(def double-letters (map #(str % %) (alphabet)))
+(def double-letters (map #(str % %) (s/alphabet)))
 
 (defn has-three-vowels? [s]
   (<= 3 (count (re-seq #"[aeiou]" s))))

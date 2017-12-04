@@ -1,12 +1,12 @@
 (ns aoc.core.math
-  (:require [clojure.math.combinatorics :as combo]
-            [clojure.math.numeric-tower :as math]))
+  (:require [aoc.core.macros :as macros]
+            [aoc.core.string :as s]
+            [clojure.math.numeric-tower :as nt]
+            [clojure.math.combinatorics :as c]))
 
-(defn combinations-of-size [items n]
-  (combo/combinations items n))
+(macros/import-all-vars clojure.math.numeric-tower)
+(macros/import-all-vars clojure.math.combinatorics)
 
 (defn all-combinations [items]
-  (mapcat #(combinations-of-size items %) (range 1 (inc (count items)))))
+  (mapcat #(combinations items %) (range 1 (inc (count items)))))
 
-(defn abs [n]
-  (math/abs n))
