@@ -24,13 +24,13 @@
   (vec (take rows (repeat (vec (take cols (repeat initial-value)))))))
 
 (defn row [matrix y]
-  (nth matrix y))
+  (matrix y))
 
 (defn lookup [matrix y x]
-  (nth (row matrix y) x))
+  ((row matrix y) x))
 
 (defn assign [matrix [y x value]]
-  (assoc matrix y (assoc (nth matrix y) x value)))
+  (assoc matrix y (assoc (matrix y) x value)))
 
 (defn assign-range [ matrix [ y1 x1 y2 x2 value] ]
   (reduce assign matrix (map #(conj % value) (range-pairs y1 x1 y2 x2))))
