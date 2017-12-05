@@ -1,4 +1,5 @@
 (ns aoc.runner
+  (:gen-class)
   (:require [aoc.core.io :refer :all]))
 
 (defn- lookup [year day fn-or-var]
@@ -31,3 +32,15 @@
 
 (defn run-year [year]
   (map #(run-day year %) (range 1 26)))
+
+(defn parse-arg [arg]
+  (if (and (string? arg) (integer? (read-string arg)))
+    (read-string arg)
+    arg))
+
+(defn -main [& args]
+  (condp = (count args)
+    1 (run-year (parse-arg (first args)))
+    2 (run-day (parse-arg (first args)) (parse-arg (second args)))
+    3 (run-day (parse-arg (first args)) (parse-arg (second args)) (nth args 2))
+    (println "usage <year> [day] [input]")))
