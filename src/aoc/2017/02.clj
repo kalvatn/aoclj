@@ -4,16 +4,18 @@
 
 (def input (lines "2017/02.txt"))
 
+(set! *unchecked-math* :warn-on-boxed)
+
 (defn parse-input [input]
   (map #(read-string (str "[" % "]")) input))
 
 (defn row-diff-largest-smallest [row]
-  (- (reduce max row) (reduce min row)))
+  (- ^long (reduce max row) ^long (reduce min row)))
 
 (defn divide [row]
-  (/ (reduce max row) (reduce min row)))
+  (/ ^long (reduce max row) ^long (reduce min row)))
 
-(defn evenly-divisible? [[x y]]
+(defn evenly-divisible? [[^long x ^long y]]
   (integer? (/ x y)))
 
 (defn max-min [row]

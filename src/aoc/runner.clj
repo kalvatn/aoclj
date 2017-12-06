@@ -13,8 +13,9 @@
 (defn- print-result-with-time [prefix function input]
   (time (print (format "%25s : %-15s" prefix (function input)))))
 
-(defn- print-error [year day error]
-   (println (format "error running aoc.%4d.%02d : %s" year day (.getMessage error))))
+(defn- print-error [year day error])
+   ; (println (format "error running aoc.%4d.%02d : %s" year day (.getMessage error))))
+   ; (println (format "error running aoc.%4d.%02d : %s" year day)))
 
 (defn run-day
   ([year day]

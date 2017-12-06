@@ -22,7 +22,7 @@
 (defn part-two-action-fn [action]
   (condp = action
     TURN_OFF (fn [^long v] (if (pos? v) (dec v) v))
-    TURN_ON (fn [^long v] (inc v))
+    TURN_ON inc
     TOGGLE (fn [^long v] (+ 2 v))))
 
 (defn parse-v2 [s action-lookup-fn]

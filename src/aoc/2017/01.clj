@@ -2,6 +2,7 @@
   (:require [aoc.core.io :refer :all]))
 
 (def input (first-line "2017/01.txt"))
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn parse-input [input]
   (map read-string (map str input)))
@@ -15,11 +16,11 @@
 (defn sum-digits-part-one [digits]
   (let [g (group-digits-part-one digits)
         first-equals-last (= (first digits) (last digits))]
-      :else (+ (reduce + (map first g)) (if first-equals-last (first digits) 0))
+      (+ ^long (reduce + (map first g)) (if first-equals-last ^long (first digits) 0))
     ))
 
-(defn get-halfway-index [index length]
-  (mod (+ index (/ length 2)) length))
+(defn get-halfway-index [^long index ^long length]
+  (mod (+ index ^long (/ length 2)) length))
 
 (defn lookup-halfway [digits index]
   (nth digits (get-halfway-index index (count digits))))
