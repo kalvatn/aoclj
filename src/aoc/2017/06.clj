@@ -40,4 +40,3 @@
 
 (defn part-two [input]
   ((cycle-redistribution (parse-input input)) 2))
-
