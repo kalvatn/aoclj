@@ -5,23 +5,23 @@
 
 (def input (first-line "2015/11.txt"))
 
-(def letter-straights (set (map #(apply str %) (partition 3 1 (s/alphabet)))))
+(def letter-straights (set (map #(s/join %) (partition 3 1 (s/alphabet)))))
 
 (defn increment-char [c]
   (if (= \z c) \a (char (inc (int c)))))
 
 (defn increment-string [s]
   (loop [n (dec (count s)) r []]
-    (if (neg? n) (apply str r)
+    (if (neg? n) (s/join r)
       (let [c (increment-char (nth s n))]
-        (if (not= \a c) (apply str (flatten [(take n s) c r]))
+        (if (not= \a c) (s/join (flatten [(take n s) c r]))
           (recur (dec n) (conj r c)))))))
 
 (defn is-letter-straight? [s]
   (contains? letter-straights s))
 
 (defn split-into-triples [s]
-  (map #(apply str %) (partition 3 1 s)))
+  (map #(s/join %) (partition 3 1 s)))
 
 (defn has-letter-straight? [s]
   ; (any? true? (pmap #(.contains s %) letter-straights))

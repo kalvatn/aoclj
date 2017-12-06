@@ -35,5 +35,5 @@
 
 (defn part-two [input]
   (let [p1 (filter-duplicates input)]
-    (count (filter (complement has-anagram?) p1))
+    (count (remove has-anagram? p1))
   ))

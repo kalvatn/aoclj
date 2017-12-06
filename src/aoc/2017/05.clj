@@ -19,7 +19,7 @@
     (loop [vs jumptable
            i 0
            steps 0]
-      (if (or (< i 0) (>= i size)) steps
+      (if (or (neg? i) (>= i size)) steps
       (let [v (aget vs i)
             ; v2 (int (v-fn v))]
             v2 (if (and part-two? (>= v 3)) (dec v) (inc v))]
@@ -30,8 +30,8 @@
 
 (defn part-one [input]
   ; (time (count-steps (parse-input input) (fn ^long [^long v] (inc v)))))
-  (time (count-steps (parse-input input) false)))
+  (count-steps (parse-input input) false))
 
 (defn part-two [input]
   ; (time (count-steps (parse-input input) (fn ^long [^long v] (if (>= v 3) (dec v) (inc v))))))
-  (time (count-steps (parse-input input) true)))
+  (count-steps (parse-input input) true))

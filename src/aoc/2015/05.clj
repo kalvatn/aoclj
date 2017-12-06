@@ -5,6 +5,8 @@
 
 (def input (lines "2015/05.txt"))
 
+(set! *unchecked-math* :warn-on-boxed)
+
 (def disallowed [ "ab" "cd" "pq" "xy" ])
 
 (def double-letters (map #(str % %) (s/alphabet)))
@@ -13,17 +15,16 @@
   (<= 3 (count (re-seq #"[aeiou]" s))))
 
 
-(defn has-double-letter? [s]
+(defn has-double-letter? [^String s]
   (let [ h (map #(.contains s %) double-letters)]
   (any? true? h)))
 
-(defn has-disallowed? [s]
+(defn has-disallowed? [^String s]
   (let [ h (map #(.contains s %) disallowed)]
   (any? true? h)))
 
 (defn is-nice? [s]
   (not-any? false? [ (has-three-vowels? s) (has-double-letter? s) (not (has-disallowed? s))]))
-
 
 (defn group-by-pair [s]
   (apply merge-with concat (map-indexed (fn [a b] { b [a] }) (partition 2 1 s))))
@@ -32,7 +33,7 @@
   (let [grouped (group-by-pair s)
         repeating-pair-indices (filter #(> (count %) 1) (vals grouped))
         ]
-    (not (nil? (some (fn [[x & xs]] (some #(> (- % x) 1) xs)) repeating-pair-indices)))))
+    (not (nil? (some (fn [[^long x & xs]] (some #(> ^long (- ^long % x) 1) xs)) repeating-pair-indices)))))
 
 (defn is-xyx? [s]
   (let [a (first s)

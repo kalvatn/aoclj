@@ -1,13 +1,13 @@
 (ns aoc.core.macros
-  (:use [potemkin]))
+  (:require [potemkin :as p]))
 
 (defmacro import-all-vars
   [namespace]
-  `(potemkin/import-vars
+  `(p/import-vars
     [~namespace
      ~@(map key (ns-publics (the-ns namespace)))]))
 
 (defmacro import-all-vars-with-exclusions [namespace exclusions]
   (let [publics (ns-publics (the-ns namespace))
         filtered-publics (reduce dissoc publics exclusions)]
-  `(potemkin/import-vars [~namespace ~@(keys filtered-publics)])))
+  `(p/import-vars [~namespace ~@(keys filtered-publics)])))

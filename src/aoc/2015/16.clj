@@ -42,7 +42,7 @@
   (map #(clue-fn aunt %) (keys clues)))
 
 (defn filter-aunt [aunt clue-fn]
-  (if (not-any? false? (matches-clues aunt clue-fn)) aunt nil))
+  (when (not-any? false? (matches-clues aunt clue-fn)) aunt))
 
 
 (defn part-one [input]

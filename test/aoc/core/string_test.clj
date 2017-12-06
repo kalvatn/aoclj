@@ -6,11 +6,11 @@
   (is (= [ \a \b \c ] (s/char-range \a \c)))
   (is (= [ \a \b \c \d \e \f \g \h ] (s/char-range \a \h))))
 
-(deftest test-char-range
+(deftest test-char-range-plus
   (is (= [ \a \b \c \d \e ] (s/char-range-plus \a 4))))
 
 (deftest test-alphabet
-  (is (= "abcdefghijklmnopqrstuvwxyz" (apply str (s/alphabet)))))
+  (is (= "abcdefghijklmnopqrstuvwxyz" (s/join (s/alphabet)))))
 
 (deftest test-count-occurrences
   (testing "count occurrences"
@@ -28,14 +28,14 @@
   (is (= "fabcde" (s/rotate-right "abcdef")))
   (is (= "fabcde" (s/rotate-right "abcdef" 1))))
 
-(deftest test-rotate-right
+(deftest test-rotate-left
   (is (= "bcdefa" (s/rotate-left "abcdef")))
   (is (= "bcdefa" (s/rotate-left "abcdef" 1))))
 
 (deftest test-rotations-left
   (is (= ["bcdefa" "cdefab" "defabc" "efabcd" "fabcde"] (s/rotations-left "abcdef"))))
 
-(deftest test-rotations-left
+(deftest test-rotations-right
   (is (= ["fabcde" "efabcd" "defabc" "cdefab" "bcdefa"] (s/rotations-right "abcdef"))))
 
 (deftest test-padleft

@@ -27,23 +27,23 @@
 
 (defn rotate-left
   ([s] (rotate-left s 1))
-  ([s n] (apply str (concat (drop n s) (take n s)))))
+  ([s n] (join (concat (drop n s) (take n s)))))
 
 (defn rotations-left [s]
   (drop 1 (take (count s) (iterate rotate-left s))))
 
 (defn rotate-right
   ([s] (rotate-right s 1))
-  ([s n] (apply str (concat (take-last n s) (drop-last n s)))))
+  ([s n] (join (concat (take-last n s) (drop-last n s)))))
 
 (defn rotations-right [s]
   (drop 1 (take (count s) (iterate rotate-right s))))
 
 (defn padleft [s n pad]
-  (apply str (concat (take (- n (count s)) (repeat pad)) s)))
+  (join (concat (take (- n (count s)) (repeat pad)) s)))
 
 (defn padright [s n pad]
-  (apply str (concat s (take (- n (count s)) (repeat pad)))))
+  (join (concat s (take (- n (count s)) (repeat pad)))))
 
 (defn replace-index [s index replacement]
   (str (subs s 0 index) replacement (subs s (inc index) (count s))))
@@ -75,7 +75,7 @@
       (subvec v (inc from) (count v)))))
 
 (defn move-index [s from-index to-index]
-  (apply str (move-element (vec (seq s)) from-index to-index)))
+  (join (move-element (vec (seq s)) from-index to-index)))
 
 
 

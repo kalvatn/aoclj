@@ -28,7 +28,7 @@
   ((keyword reindeer-name) reindeers))
 
 (defn inc-distance [reindeer]
-  (assoc reindeer :distance (+ (:distance reindeer) (:speed reindeer))))
+  (update-in reindeer [:distance] + (:speed reindeer)))
 
 (defn reset-stamina [reindeer]
   (assoc reindeer :stamina (dec (:stamina (lookup (:name reindeer))))))
@@ -38,10 +38,10 @@
 
 
 (defn dec-stamina [reindeer]
-  (assoc reindeer :stamina (dec (:stamina reindeer))))
+  (update-in reindeer [:stamina] dec))
 
 (defn dec-rest [reindeer]
-  (assoc reindeer :rest (dec (:rest reindeer))))
+  (update-in reindeer [:rest] dec))
 
 
 (defn tick [reindeer]
