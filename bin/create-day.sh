@@ -11,13 +11,18 @@ FILE_SESSION="$DIR_ROOT/aoc_session.txt"
 YEAR="$1"
 DAY="$2"
 
-if [ -z "$YEAR" -o -z "$DAY" -o "${#YEAR}" -ne 4 -o "$DAY" -lt 1 -o "$DAY" -gt 25 ]; then
+if [ -z "$YEAR" -o -z "$DAY" ]; then
+  echo "usage ${BASH_SOURCE[0]} <year> <day> (1-25)"
+  exit 1
+fi
+
+if [ "${#YEAR}" -ne 4 -o "$DAY" -lt 1 -o "$DAY" -gt 25 ]; then
   echo "usage ${BASH_SOURCE[0]} <year> <day> (1-25)"
   exit 1
 fi
 
 printf -v DAY_ZEROPAD "%02d" $DAY
-echo "generating skeleton for $YEAR - day $DAY"
+echo "generating skeleton for ${YEAR}-${DAY_ZEROPAD}"
 
 TEMPLATE_SOURCE="$DIR_TEMPLATES/day.clj.template"
 TEMPLATE_TEST="$DIR_TEMPLATES/day_test.clj.template"
