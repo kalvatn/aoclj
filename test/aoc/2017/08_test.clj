@@ -18,9 +18,13 @@
 
 (deftest test-part-one
   ; (part-one input)
-  (part-one ["b inc 5 if a > 1"
+  (is (= 1 (part-one ["b inc 5 if a > 1"
              "a inc 1 if b < 5"
              "c dec -10 if a >= 1"
-             "c inc -20 if c == 10"])
+             "c inc -20 if c == 10"])))
   )
-(deftest test-part-two)
+(deftest test-part-two
+  (is (= 10 (part-two ["b inc 5 if a > 1"
+             "a inc 1 if b < 5"
+             "c dec -10 if a >= 1"
+             "c inc -20 if c == 10"]))))
