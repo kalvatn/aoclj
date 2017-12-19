@@ -15,15 +15,19 @@
   )
 
 (deftest test-knot
-  (is (= [2 1 0 3 4] (knot [0 1 2 3 4] 0 3 0)))
-  (is (= [4 3 0 1 2] (knot [2 1 0 3 4] 3 4 1)))
-  (is (= [3 4 2 1 0] (knot [4 3 0 1 2] 1 5 4)))
+  (is (= [2 1 0 3 4] (knot [0 1 2 3 4] 0 3 )))
+  (is (= [4 3 0 1 2] (knot [2 1 0 3 4] 3 4 )))
+  (is (= [3 4 2 1 0] (knot [4 3 0 1 2] 1 5 )))
   )
 
 (deftest test-rotate
   (is (= [1 2 3 4 0] (rotate [0 1 2 3 4] 1)))
   (is (= [2 3 4 0 1] (rotate [0 1 2 3 4] 2)))
   (is (= [0 1 2 3 4] (rotate [0 1 2 3 4] 5)))
+  )
+
+(deftest test-xor-coll
+  (is (= 64 (xor-coll [65 27 9 1 4 3 40 50 91 7 6 0 2 5 68 22])))
   )
 
 (deftest test-part-one)
