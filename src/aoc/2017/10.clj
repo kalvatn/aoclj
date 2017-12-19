@@ -7,7 +7,6 @@
 (defn parse-input [line]
   (vec (map read-string (s/split line #","))))
 
-
 (defn select-range [coll current-index size]
   (take size (drop current-index (cycle coll))))
 
@@ -18,10 +17,10 @@
   (concat (drop n coll) (take n coll)))
 
 (defn knot [coll current-index size]
-  (let [rot (rotate coll current-index)
-        pre (concat (reverse-range rot 0 size) (drop size rot))
-        fin (rotate pre (- (count coll) current-index))]
-    fin))
+  (let [pre-rot (rotate coll current-index)
+        new-seq (concat (reverse-range pre-rot 0 size) (drop size pre-rot))
+        post-rot (rotate new-seq (- (count coll) current-index))]
+    post-rot))
 
 (defn knot-hash [coll lengths]
   (let [list-size (count coll)]
@@ -29,35 +28,18 @@
            i 0
            pos 0
            step 0]
-      ; (println coll i pos step)
       (if (>= i (count lengths)) coll
         (let [size (lengths i)]
           (recur (knot coll pos size)
                  (inc i)
-                 (mod (+ pos size step) list-size)
+                 (int (mod (+ pos size step) list-size))
                  (inc step)))))))
-
-(defn knot-hash-pt2 [coll lengths]
-  (let [list-size (count coll)]
-    (loop [coll coll
-           i 0
-           pos 0
-           step 0]
-      ; (println coll i pos step)
-      (if (>= i (count lengths)) coll
-        (let [size (lengths i)]
-          (recur (knot coll pos size)
-                 (inc i)
-                 (mod (+ pos size step) list-size)
-                 (inc step)))))))
-
 
 (defn xor-coll [coll]
   (reduce bit-xor coll))
 
 (defn xor-all [coll]
   (map #(reduce bit-xor %) (partition 16 coll)))
-
 
 (defn part-one
   ([input] (part-one input 256))
@@ -70,21 +52,17 @@
      )
    ))
 
-(def tohex #(Long/toHexString %))
 (defn part-two [input]
    (let [initial (range 0 256)
          ; lengths [17 31 73 47 23]
          lengths (concat (map int input) [17 31 73 47 23])
          lengths-repeated (vec (flatten (repeat 64 lengths)))
-         knotted (knot-hash-pt2 initial lengths-repeated)
+         knotted (knot-hash initial lengths-repeated)
          xored (xor-all knotted)
          hexed (map #(format "%02x" %) xored)
          result (clojure.string/join hexed)
          ]
-     (println knotted)
-     (println xored)
-     (println hexed)
-     (println result)
+     result
      )
    )
 
