@@ -117,3 +117,10 @@
   (let [m (create-2d 3 3 0)]
     (is (= [[0 1] [1 0] [1 1]] (neighbours m [0 0])))))
 
+(deftest test-neighbours-4
+  (let [m (create-2d 3 3 0)]
+    (is (= [[0 1] [1 0]] (neighbours-4 m [0 0])))
+    (is (= [[1 2] [1 0] [0 1] [2 1]] (neighbours-4 m [1 1])))
+    (is (= [[1 1] [0 2] [2 2]] (neighbours-4 m [1 2])))
+  ))
+

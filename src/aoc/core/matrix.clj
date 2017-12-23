@@ -55,3 +55,10 @@
              [(inc y) (dec x)]
              [(dec y) (inc x)]
              [(dec y) (dec x)]]))
+
+(defn neighbours-4 [matrix [^long y ^long x]]
+  (filter #(not (out-of-bounds? matrix %))
+            [[y (inc x)]
+             [y (dec x)]
+             [(dec y) x]
+             [(inc y) x]]))
