@@ -31,13 +31,13 @@
   (is (= 100000 (count (create-2d 100000 100 0)))))
 
 (deftest test-lookup
-  (is (= 0 (lookup (create-2d 3 3 0) 0 0)))
-  (is (= 0 (lookup (create-2d 100000 100000 0) 999 9999))))
+  (is (= 0 (lookup (create-2d 3 3 0) [0 0])))
+  (is (= 0 (lookup (create-2d 100000 100000 0) [999 9999]))))
 
 (deftest test-assign
   (let [matrix (create-2d 100000 100000 0)
         after (assign matrix [99128 12345 "abc"])]
-    (is (= "abc" (lookup after 99128 12345)))))
+    (is (= "abc" (lookup after [99128 12345])))))
 
 (deftest test-assign-range
   (let [matrix (create-2d 10 10 0)
