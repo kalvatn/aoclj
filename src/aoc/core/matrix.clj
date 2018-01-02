@@ -24,19 +24,19 @@
   (vec (take rows (repeat (vec (take cols (repeat initial-value)))))))
 
 (defn row [matrix y]
-  (nth matrix y))
+  (matrix y))
 
-(defn lookup [matrix y x]
+(defn lookup [matrix [^long y ^long x]]
   (nth (row matrix y) x))
 
-(defn assign [matrix [y x value]]
-  (assoc matrix y (assoc (nth matrix y) x value)))
+(defn assign [matrix [^long y ^long x value]]
+  (assoc matrix y (assoc (matrix y) x value)))
 
 (defn assign-range [ matrix [ y1 x1 y2 x2 value] ]
   (reduce assign matrix (map #(conj % value) (range-pairs y1 x1 y2 x2))))
 
 (defn assign-with-fn [matrix [y x value-fn]]
-  (assign matrix [y x (value-fn (lookup matrix y x))]))
+  (assign matrix [y x (value-fn (lookup matrix [y x]))]))
 
 (defn assign-range-with-fn [ matrix [ y1 x1 y2 x2 value-fn] ]
   (reduce assign-with-fn matrix (map #(conj % value-fn) (range-pairs y1 x1 y2 x2))))
@@ -55,3 +55,10 @@
              [(inc y) (dec x)]
              [(dec y) (inc x)]
              [(dec y) (dec x)]]))
+
+(defn neighbours-4 [matrix [^long y ^long x]]
+  (filter #(not (out-of-bounds? matrix %))
+            [[y (inc x)]
+             [y (dec x)]
+             [(dec y) x]
+             [(inc y) x]]))

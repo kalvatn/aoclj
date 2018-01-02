@@ -48,11 +48,11 @@
         ]
     (first (remove nil?
        (for [^int y (range size) ^int x (range size)]
-         (when (= (matrix/lookup spiral y x) input) (math/abs (- y x))))))))
+         (when (= (matrix/lookup spiral [y x]) input) (math/abs (- y x))))))))
 
 (defn sum-neighbours [matrix y x]
   ; +' to fix integer overflow issue (autopromotes longs)
-  (reduce +' (map #(matrix/lookup matrix (first %) (second %)) (matrix/neighbours matrix [ y x ]))))
+  (reduce +' (map #(matrix/lookup matrix %) (matrix/neighbours matrix [ y x ]))))
 
 (defn sum-spiral [size matrix]
   (let [turns (set (drop 2 (map next-turn (range (math/expt size 2)))))
@@ -81,6 +81,6 @@
 
     (first (sort (remove nil?
                    (for [y (range size) x (range size)]
-                     (let [^int value (matrix/lookup spiral-seq y x)]
+                     (let [^int value (matrix/lookup spiral-seq [y x])]
                        (when (> value ^int input) value))))))
   ))
