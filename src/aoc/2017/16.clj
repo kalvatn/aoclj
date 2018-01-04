@@ -14,7 +14,6 @@
 (defn parse-input [input]
   (map parse-token (s/split input #",")))
 
-
 (defn apply-spin [programs spin-count]
   (s/rotate-right programs spin-count))
 
@@ -48,22 +47,17 @@
 
 
 (def dance-moves (parse-input input))
+(def initial-programs (apply str (s/char-range \a \p)))
 
 (defn part-one [input]
-  (reduce apply-move (apply str (s/char-range \a \p)) dance-moves)
-  ; (take 3(reductions apply-move (apply str (s/char-range \a \p)) dance-moves))
-  )
-(def memoized-apply-move (memoize apply-move))
+  (reduce apply-move initial-programs dance-moves))
+
 (defn part-two [input]
-  (let [initial (apply str (s/char-range \a \p))
-        billion 1000000000
-        ]
-    (loop [n 0
-           p initial
-           seen (sorted-set)]
-      (println p)
-      (if (contains? seen p)
-        (println seen n (mod billion n) ((vec seen) (mod billion n)))
-        (recur (inc n)
-               (reduce memoized-apply-move p dance-moves)
-               (conj seen p))))))
+  (loop [n 0
+         p initial-programs
+         seen []]
+    (if (contains? (set seen) p)
+      (seen (mod 1000000000 n))
+      (recur (inc n)
+             (reduce apply-move p dance-moves)
+             (conj seen p)))))
