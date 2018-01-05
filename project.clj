@@ -6,10 +6,10 @@
   :jvm-opts ["-Xmx1G"]
   :main aoc.runner
   :global-vars {
-                *warn-on-reflection* true
+                ; *warn-on-reflection* true
                 }
-  :repl-options {
-                 :caught clj-stacktrace.repl/pst+}
+  ; :repl-options {
+  ;                :caught clj-stacktrace.repl/pst+}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [digest "1.4.6"]
                  [org.clojure/math.combinatorics "0.1.4"]
